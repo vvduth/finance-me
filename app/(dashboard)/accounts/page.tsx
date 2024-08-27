@@ -22,6 +22,12 @@ const data:Payment[] = [
     status: "pending",
     email: "m@example.com",
   },
+  {
+    id: "728ed52g",
+    amount: 100,
+    status: "success",
+    email: "a@example.com",
+  },
   // ...
 ]
 
@@ -40,7 +46,11 @@ const AccountPage = () => {
                 Add new 
               </Button>
             </CardHeader>
-            <DataTable columns={columns} data={data} />
+            <DataTable columns={columns} data={data} 
+              filterKey='email'
+              onDelete={() => {}}
+              disabled={false}
+            />
         </Card>
     </div>
   )

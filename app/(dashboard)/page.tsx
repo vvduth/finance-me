@@ -1,10 +1,12 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useGetAccount } from "@/features/accounts/api/use-get-account";
-import { UserButton } from "@clerk/nextjs";
-import Image from "next/image";
+import { useNewAccount } from "@/features/accounts/hooks/use-new-account";
 
 export default function Home() {
+  
+  const {isOpen, onClose, onOpen} = useNewAccount();
   const { data: accounts, isLoading } = useGetAccount();
 
   if (isLoading) {
@@ -12,9 +14,9 @@ export default function Home() {
   }
   return (
     <div>
-      {accounts?.map((account) => (
-        <div key={account.id}>{account.name}</div>
-      ))}
+     <Button onClick={onOpen}>
+        Add new Account
+     </Button>
     </div>
   );
 }

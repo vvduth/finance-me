@@ -78,6 +78,10 @@ export function DataTable<TData, TValue>({
         {table.getFilteredSelectedRowModel().rows.length > 0  && (
             <Button size={"sm" } variant={"outline"}
                 className="ml-auto font-normal text-xs"
+                onClick={() => {
+                  onDelete(table.getFilteredRowModel().rows)
+                  table.resetRowSelection()
+                }}
             >
                 <Trash
                  className="size-4 mr-2"

@@ -1,13 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useGetAccount } from "@/features/accounts/api/use-get-account";
-import { useNewAccount } from "@/features/accounts/hooks/use-new-account";
+import { useNewCategory } from "@/features/categories/hooks/use-new-category";
+import { useGetCategories } from "@/features/categories/api/use-get-categories";
 
 export default function Home() {
   
-  const {isOpen, onClose, onOpen} = useNewAccount();
-  const { data: accounts, isLoading } = useGetAccount();
+  const {isOpen, onClose, onOpen} = useNewCategory();
+  const { data: categories, isLoading } = useGetCategories();
 
   if (isLoading) {
     return <div>Is loading</div>;
@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div>
      <Button onClick={onOpen}>
-        Add new Account
+        Add new categories
      </Button>
     </div>
   );

@@ -15,6 +15,13 @@
       "when": 1724328841586,
       "tag": "0001_harsh_blink",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1724841352181,
+      "tag": "0002_wild_boomer",
+      "breakpoints": true
     }
   ]
 }

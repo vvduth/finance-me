@@ -7,7 +7,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useOpenAccount } from "../hooks/use-open-account";
-import { AccountForm } from "./account-form";
+import { AccountForm } from "./transaction-form";
 import { insertAccountSchema } from "@/db/schema";
 import { z } from "zod";
 

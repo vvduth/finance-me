@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div>
      <Button onClick={onOpen}>
-        Add new categories
+       Hi bro
      </Button>
     </div>
   );

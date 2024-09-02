@@ -4,7 +4,6 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import { useNewTransaction } from "../hooks/use-new-transaction";
 import { insertTransactionSchema } from "@/db/schema";

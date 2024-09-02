@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Select } from "@/components/select";
 import { Textarea } from "@/components/ui/textarea";
+import { convertAmountToMiliUnits } from "@/lib/utils";
 
 const formSchema = z.object({
   date: z.coerce.date(),
@@ -61,8 +62,9 @@ export const TransactionForm = ({
   });
 
   const handleSubmit = (values: FormValues) => {
-    console.log({ values });
-    //onSubmit(values);
+    const amount = parseFloat(values.amount);
+    const amountInMiliUnit = convertAmountToMiliUnits(amount);
+    onSubmit({ ...values, amount: amountInMiliUnit });
   };
 
   const handleDelete = () => {
@@ -127,18 +129,18 @@ export const TransactionForm = ({
             </FormItem>
           )}
         />
-         <FormField
+        <FormField
           name="payee"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Payee</FormLabel>
               <FormControl>
-               <Input 
-                disabled={disabled}
-                placeholder="Add a payee"
-                {...field}
-               />
+                <Input
+                  disabled={disabled}
+                  placeholder="Add a payee"
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -150,11 +152,11 @@ export const TransactionForm = ({
             <FormItem>
               <FormLabel>Amount</FormLabel>
               <FormControl>
-               <AmountInput 
-                disabled={disabled}
-                placeholder="0.00"
-                {...field}
-               />
+                <AmountInput
+                  disabled={disabled}
+                  placeholder="0.00"
+                  {...field}
+                />
               </FormControl>
             </FormItem>
           )}
@@ -166,18 +168,18 @@ export const TransactionForm = ({
             <FormItem>
               <FormLabel>Add a note</FormLabel>
               <FormControl>
-               <Textarea 
-                {...field}
-                value={field.value ?? ""}
-                disabled={disabled}
-                placeholder="Add a note..."
-               />
+                <Textarea
+                  {...field}
+                  value={field.value ?? ""}
+                  disabled={disabled}
+                  placeholder="Add a note..."
+                />
               </FormControl>
             </FormItem>
           )}
         />
         <Button className="w-full" disabled={disabled}>
-          {id ? "Save changes" : "Create account"}
+          {id ? "Save changes" : "Create transaction"}
         </Button>
 
         {!!id && (
@@ -189,7 +191,7 @@ export const TransactionForm = ({
             variant={"outline"}
           >
             <Trash className="size-4 mr-2" />
-            Delete account
+            Delete transaction
           </Button>
         )}
       </form>

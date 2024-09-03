@@ -119,7 +119,7 @@ export const EditTransactionSheet = () => {
         <SheetContent className="space-y-4">
           <SheetHeader>
             <SheetTitle>Edit transaction</SheetTitle>
-            <SheetDescription>Edit an existing account</SheetDescription>
+            <SheetDescription>Edit an existing transaction</SheetDescription>
           </SheetHeader>
           {isLoading ? (
             <div

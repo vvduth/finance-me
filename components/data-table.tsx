@@ -89,7 +89,7 @@ export function DataTable<TData, TValue>({
               const ok = await confirm();
 
               if (ok) {
-                onDelete(table.getFilteredRowModel().rows);
+                onDelete(table.getFilteredSelectedRowModel().rows);
                 table.resetRowSelection();
               }
             }}

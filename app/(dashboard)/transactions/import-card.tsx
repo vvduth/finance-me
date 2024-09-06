@@ -57,6 +57,8 @@ const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
   const progress = Object.values(selectedColumns).filter(Boolean).length;
 
   const handleContinue = () => {
+
+    
     const getColumnIndex = (column: string) => {
       return column.split("_")[1];
     };
@@ -70,7 +72,7 @@ const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
         .map((row) => {
           const tranformedRow = row.map((cell, index) => {
             const columnIndex = getColumnIndex(`column_${index}`);
-            return selectedColumns[`column:_${columnIndex}`] ? cell : null;
+            return selectedColumns[`column_${columnIndex}`] ? cell : null;
           });
           return tranformedRow.every((item) => item === null)
             ? []
@@ -95,8 +97,8 @@ const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
       date: format(parse(item.date, dateFormat, new Date()), outputFormat)
     }))
 
-    console.log(formattedData)
-    //onSubmit(formattedData)
+    
+    onSubmit(formattedData)
   };
 
   return (
@@ -117,6 +119,7 @@ const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
               className="w-full lg:w-auto"
               size={"sm"}
               disabled={progress < requiredOptions.length}
+              onClick={handleContinue}
             >
               Continue ({progress}/ {requiredOptions.length})
             </Button>

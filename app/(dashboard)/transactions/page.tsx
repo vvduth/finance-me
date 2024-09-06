@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import {transactions as transactionSchema} from "@/db/schema"
 import {
   Card,
   CardContent,
@@ -19,6 +20,9 @@ import { useNewTransaction } from "@/features/transactions/hooks/use-new-transac
 import { useState } from "react";
 import UploadButton from "./upload-button";
 import ImportCard from "./import-card";
+import useSelectAccount from "@/features/accounts/hooks/use-select-account";
+import { toast } from "sonner";
+import { useBulkCreateTransactions } from "@/features/transactions/api/use-bulk-create-transactions";
 enum VARIANTS {
   LIST = "LIST",
   IMPORT = "IMPORT",
@@ -30,10 +34,12 @@ const INITIAL_IMPORT_RESULT = {
   meta: {},
 };
 const TransactionPage = () => {
+  const [AccountDialog, confirm] = useSelectAccount()
   const newTransaction = useNewTransaction();
   const transactionsQuery = useGetTransactions();
   const transactions = transactionsQuery.data || [];
   const deleteTransaction = useBulkDeleteTransactions();
+  const bulkCreateTransaction = useBulkCreateTransactions();
 
   const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST);
   const [importResult, setImportResult] = useState(INITIAL_IMPORT_RESULT);
@@ -49,6 +55,25 @@ const TransactionPage = () => {
   };
 
   const isDisabled = transactionsQuery.isLoading || deleteTransaction.isPending;
+
+  const onSubmitImport = async (values: typeof transactionSchema.$inferInsert[]) => {
+    const accountId = await confirm();
+
+    if(!accountId) {
+      return toast.error("Please select an account to continue")
+    }
+
+    const data = values.map((value)=>({
+      ...value, 
+      accountId: accountId as string 
+    }))
+    console.log("clicked")
+    bulkCreateTransaction.mutate(data, {
+      onSuccess: () => {
+        onCanCelImport();
+      }
+    })
+  }
 
   if (transactionsQuery.isLoading) {
     return (
@@ -70,10 +95,11 @@ const TransactionPage = () => {
   if (variant === VARIANTS.IMPORT) {
     return (
       <>
+      <AccountDialog />
         <ImportCard
           data={importResult.data}
           onCancel={onCanCelImport}
-          onSubmit={() => {}}
+          onSubmit={onSubmitImport}
         />
       </>
     );

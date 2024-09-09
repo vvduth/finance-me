@@ -1,22 +1,11 @@
-"use client";
+import DataGrid from "@/components/data-grid";
 
-import { Button } from "@/components/ui/button";
-import { useNewCategory } from "@/features/categories/hooks/use-new-category";
-import { useGetCategories } from "@/features/categories/api/use-get-categories";
 
 export default function Home() {
   
-  const {isOpen, onClose, onOpen} = useNewCategory();
-  const { data: categories, isLoading } = useGetCategories();
-
-  if (isLoading) {
-    return <div>Is loading</div>;
-  }
   return (
-    <div>
-     <Button onClick={onOpen}>
-       Hi bro
-     </Button>
+    <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
+      <DataGrid/>
     </div>
-  );
+  )
 }

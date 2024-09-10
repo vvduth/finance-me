@@ -166,6 +166,7 @@ const app = new Hono().get(
         incomeAmount: currentPeriod.income,
         incomeChange,
         expenseAmount: currentPeriod.expenses,
+        expenseChange,
         categories: finalCategories,
         days
       }

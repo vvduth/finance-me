@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { eachDayOfInterval, isSameDay } from "date-fns";
+import { eachDayOfInterval, isSameDay, subDays, format } from "date-fns";
 export function filMissingDays(
   activeDays: {
     date: Date;
@@ -60,4 +60,46 @@ export function calculatePercentageChange(current: number, previous: number) {
   }
 
   return ((current - previous) / previous) * 100;
+}
+type Period = {
+  from: string | Date | undefined;
+  to: string | Date | undefined;
+};
+export function formatDateRange(period?: Period) {
+  const defaultTO = new Date();
+  const defaultFom = subDays(defaultTO, 30);
+
+  if (!period?.from) {
+    return `${format(defaultFom, "LLL dd")} - ${format(
+      defaultTO,
+      "LLL dd, y"
+    )}`;
+  }
+  if (period.to) {
+    return `${format(period.from, "LLL dd")} - ${format(
+      defaultTO,
+      "LLL dd, y"
+    )}`;
+  }
+
+  return format(period.from, "LLL dd, y");
+}
+
+export function formatPercentage(
+  value: number,
+  options: {
+    addPrefix?: boolean;
+  } = {
+    addPrefix: false,
+  }
+) {
+  const result = new Intl.NumberFormat("en-US", {
+    style: "percent",
+  }).format(value / 100);
+
+  if (options.addPrefix && value > 0) {
+    return `+${result}`;
+  }
+
+  return result;
 }

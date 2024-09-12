@@ -5,7 +5,7 @@ Welcome to the **Finance SaaS Platform** – your all-in-one solution to effecti
 
 ## 🌐 Live Demo
 
-Check out the live app here: [Finance SaaS Platform](https://finance-me-git-master-vvduths-projects.vercel.app/)
+Check out the live app here: [Finance SaaS Platform](https://finance-me-kappa.vercel.app/)
 
 
 ## 🌟 Key Features

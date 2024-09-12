@@ -12,7 +12,7 @@ import ImportTable from "./import-table";
 import {format, parse} from "date-fns"
 import { boolean } from "drizzle-orm/mysql-core";
 import { convertAmountToMiliUnits } from "@/lib/utils";
-const dateFormat = "yyyy-MM-dd HH:mm:ss";
+const dateFormat = "yyyy/MM/dd";
 const outputFormat = "yyyy-MM-dd";
 
 const requiredOptions = ["amount", "date", "payee"];

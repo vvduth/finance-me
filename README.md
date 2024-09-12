@@ -32,3 +32,5 @@ Check out the live app here: [Finance SaaS Platform](https://finance-me-kappa.ve
 - **🚀 Deployed on Vercel**: Fast, reliable deployment and hosting with Vercel.
 
 ## Screenshot
+
+![Screenshot](screenshot.png)
